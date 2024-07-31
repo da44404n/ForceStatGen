@@ -18,7 +18,7 @@ from dateutil.relativedelta import relativedelta
 import customtkinter as ctk
 from tkcalendar import Calendar
 
-import read
+import filter
 import clean
 import reset
 import cwSummary
@@ -184,7 +184,7 @@ def process(incallPath, intallPath, arrestsPath, dateStart, dateEnd, ytd, cw, bo
         ytdPre = ytdCurr - relativedelta(years=1)
 
         queue.put('Reading files...')
-        incall, intall, arrests = read.readData(incallPath, intallPath, arrestsPath)
+        incall, intall, arrests = filter.readData(incallPath, intallPath, arrestsPath)
         queue.put('Done reading.')
 
         queue.put('Cleaning incidents...')
