@@ -114,13 +114,6 @@ def grabDate(dateWindow, entry, calendar, optionSV, changeSV, dateStartSV, dateE
 
     ytdSV.set(f"{(dateEndSV.get())[:4]}-01-01")
 
-    # if changeSV.get() == dateStartSV.get():
-    #     print(f"Start Date set to: {dateStartSV.get()}\n",file=sys.stdout, flush=True)
-    # elif changeSV == dateEndSV:
-    #     print(f"End Date set to: {dateEndSV.get()}\n",file=sys.stdout, flush=True)
-    #     print(f"Start Date set to: {dateStartSV.get()}\n",file=sys.stdout, flush=True)
-    #     print(f"YTD set to: {ytdSV.get()}\n", file=sys.stdout, flush=True)
-
     dateWindow.destroy()
 
 def pickdate(event, entry, optionSV, changeSV, dateStartSV, dateEndSV, ytdSV):
@@ -155,9 +148,9 @@ def selectBoro(boroList, boro):
         boroList.append(boro)
     
 def process(incallPath, intallPath, arrestsPath, dateStart, dateEnd, ytd, cw, boroList, queue):
-    queue.put("Removing old output files...")
-
     try:
+        queue.put("Removing old output files...")
+
         if not os.path.exists(templatePath):
             queue.put("Missing PowerPoint template file. Skipping that step...")
 
@@ -176,11 +169,6 @@ def process(incallPath, intallPath, arrestsPath, dateStart, dateEnd, ytd, cw, bo
         else:
             queue.put("Presentation does not exist. Creating new one.")
 
-    except PermissionError:
-        queue.put(f"ERROR: {'Output files must be closed to run the program.'}")
-        raise Exception("Output files must be closed to run the program.")
-
-    try:
         if dateStart.startswith('<') or dateEnd.startswith('<') or ytd.startswith('<'):
             raise Exception("Please select a date range.")
 
@@ -281,6 +269,9 @@ def process(incallPath, intallPath, arrestsPath, dateStart, dateEnd, ytd, cw, bo
 
         subprocess.Popen(f'explorer /select, {reportPath}', shell=True)
     
+    except PermissionError:
+        queue.put("ERROR: Output files must be closed to run the program.")
+
     except Exception as e:
         error_message = format_exc()
 
@@ -292,6 +283,7 @@ def startProcess(runningBV, consoleTextBox, incallPath, intallPath, arrestsPath,
         return
     
     runningBV.set(True)
+    consoleTextBox.delete('0.0', 'end')
     progressBar.start()
     queue = multiprocessing.Queue()
     statProcess = multiprocessing.Process(target=process, args=(incallPath, intallPath, arrestsPath, dateStart, dateEnd, ytd, cw, boroList, queue))
