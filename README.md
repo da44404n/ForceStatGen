@@ -163,21 +163,21 @@ ForceStatGen is a Python-based application designed to automate the generation o
 
 * Click the buttons to browse and select the required data files: Incident File, Interaction File, and Arrests File.
 
-1. **Select Date Range** :
+3. **Select Date Range** :
 
 * Choose between a default span (28 days before the end date) or a custom date range.
 * Click on the date entry fields to open a calendar for date selection.
 
-1. **Select Reporting Scope** :
+4. **Select Reporting Scope** :
 
 * Check the 'CityWide' checkbox for citywide reports.
 * Select individual boroughs for borough-specific reports.
 
-1. **Generate Report** :
+5. **Generate Report** :
 
 * Click the "Generate Report" button to start the process. The application will process the data and generate the reports.
 
-1. **View Output** :
+6. **View Output** :
 
 * The generated reports will be saved in the `/output` directory. The Excel report and PowerPoint presentation (if applicable) will be available for review.
 
