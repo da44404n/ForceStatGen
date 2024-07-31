@@ -10,7 +10,7 @@ def setTimeFrameFilter(df, dateStart, dateEnd, arrest=False):
     
     return df[(to_datetime(df['Create Timestamp']) >= dateStart) & (to_datetime(df['Create Timestamp']) <= dateEnd)]
 
-def reset(INCALL, INTALL, ARRESTS, dateStartCurr, dateEndCurr,
+def dates(INCALL, INTALL, ARRESTS, dateStartCurr, dateEndCurr,
         dateStartPre, dateEndPre, ytdCurr, ytdPre):
 
     # columns for the incall period/ytd

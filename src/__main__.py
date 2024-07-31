@@ -204,7 +204,7 @@ def process(incallPath, intallPath, arrestsPath, dateStart, dateEnd, ytd, cw, bo
         (currentIncidentPeriod, currentIncidentYTD, currentInteractionPeriod, currentInteractionYTD,
         previousIncidentPeriod, previousIncidentYTD, previousInteractionPeriod, previousInteractionYTD,
         currentArrestPeriod, currentArrestYTD, previousArrestPeriod, previousArrestYTD
-        ) = filter.reset(incall,intall,arrests,dateStartCurr,dateEndCurr,dateStartPre,dateEndPre,ytdCurr,ytdPre)
+        ) = filter.dates(incall,intall,arrests,dateStartCurr,dateEndCurr,dateStartPre,dateEndPre,ytdCurr,ytdPre)
 
         queue.put('Date filters set.')
 
@@ -459,9 +459,6 @@ class App(ctk.CTk):
         global progressBar
         progressFrame = ctk.CTkFrame(self)
         progressFrame.grid(row=row, column=col, padx=5, pady=5, sticky='ew')
-
-        # progressLabel = ctk.CTkLabel(progressFrame, text='Progress:')
-        # progressLabel.grid(row=0, column=0, padx=5, pady=5, sticky='ew')
 
         progressFrame.grid_columnconfigure(1,weight=1)
         progressBar = ctk.CTkProgressBar(progressFrame, progress_color='#1aaa5a', mode='indeterminate')
