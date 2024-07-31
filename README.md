@@ -92,7 +92,7 @@ ForceStatGen is a Python-based application designed to automate the generation o
    ```
 
    5. **Create the application using PyInstaller:** Use the standalone_make.bat script or run the following in the virtual environment's shell:
-      `pyinstaller -F --hidden-import "babel.numbers" --hidden-import "openpyxl.cell._writer" --upx-dir "C:\Program Files (x86)\upx-4.2.4-win64\upx.exe" --icon=./images/nypd.ico --add-data "images/nypd.ico;." --splash "images/nypdsplash.png" --onefile --noconsole --name ForceStatGen src/__main__.py`
+      `pyinstaller -F --hidden-import "babel.numbers" --hidden-import "openpyxl.cell._writer" --icon=./images/nypd.ico --add-data "images/nypd.ico;." --splash "images/nypdsplash.png" --onefile --noconsole --name ForceStatGen src/__main__.py`
 
 ## Usage
 
