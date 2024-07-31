@@ -18,9 +18,9 @@ from dateutil.relativedelta import relativedelta
 import customtkinter as ctk
 from tkcalendar import Calendar
 
-import filter
+import read
 import clean
-import reset
+import filter
 import cwSummary
 import cwBreakdown
 import overviewPpt
@@ -184,7 +184,7 @@ def process(incallPath, intallPath, arrestsPath, dateStart, dateEnd, ytd, cw, bo
         ytdPre = ytdCurr - relativedelta(years=1)
 
         queue.put('Reading files...')
-        incall, intall, arrests = filter.readData(incallPath, intallPath, arrestsPath)
+        incall, intall, arrests = read.readData(incallPath, intallPath, arrestsPath)
         queue.put('Done reading.')
 
         queue.put('Cleaning incidents...')
@@ -204,7 +204,7 @@ def process(incallPath, intallPath, arrestsPath, dateStart, dateEnd, ytd, cw, bo
         (currentIncidentPeriod, currentIncidentYTD, currentInteractionPeriod, currentInteractionYTD,
         previousIncidentPeriod, previousIncidentYTD, previousInteractionPeriod, previousInteractionYTD,
         currentArrestPeriod, currentArrestYTD, previousArrestPeriod, previousArrestYTD
-        ) = reset.reset(incall,intall,arrests,dateStartCurr,dateEndCurr,dateStartPre,dateEndPre,ytdCurr,ytdPre)
+        ) = filter.reset(incall,intall,arrests,dateStartCurr,dateEndCurr,dateStartPre,dateEndPre,ytdCurr,ytdPre)
 
         queue.put('Date filters set.')
 
