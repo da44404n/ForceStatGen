@@ -15,6 +15,7 @@ ForceStatGen is a Python-based application designed to automate the generation o
 
 * Python 3.x
 * Required Python libraries:
+
   ```
   altgraph==0.17.4
   Babel==2.15.0
@@ -37,6 +38,61 @@ ForceStatGen is a Python-based application designed to automate the generation o
   six==1.16.0
   tkcalendar==1.6.1
   tzdata==2024.1
+  xlsx2csv==0.8.3
+  XlsxWriter==3.2.0
+
+
+  ```
+* Required Python libraries with Jupyter support:
+
+  ```
+  altgraph==0.17.4
+  asttokens==2.4.1
+  Babel==2.15.0
+  colorama==0.4.6
+  comm==0.2.2
+  customtkinter==5.2.2
+  darkdetect==0.8.0
+  debugpy==1.8.2
+  decorator==5.1.1
+  et-xmlfile==1.1.0
+  executing==2.0.1
+  ipykernel==6.29.5
+  ipython==8.26.0
+  jedi==0.19.1
+  jupyter_client==8.6.2
+  jupyter_core==5.7.2
+  lxml==5.2.2
+  matplotlib-inline==0.1.7
+  nest-asyncio==1.6.0
+  numpy==2.0.1
+  openpyxl==3.1.5
+  packaging==24.1
+  pandas==2.2.2
+  parso==0.8.4
+  pefile==2023.2.7
+  pillow==10.4.0
+  platformdirs==4.2.2
+  prompt_toolkit==3.0.47
+  psutil==6.0.0
+  pure_eval==0.2.3
+  Pygments==2.18.0
+  pyinstaller==6.9.0
+  pyinstaller-hooks-contrib==2024.7
+  python-dateutil==2.9.0.post0
+  python-pptx==0.6.23
+  pytz==2024.1
+  pywin32==306
+  pywin32-ctypes==0.2.2
+  pyzmq==26.0.3
+  six==1.16.0
+  stack-data==0.6.3
+  tkcalendar==1.6.1
+  tornado==6.4.1
+  traitlets==5.14.3
+  typing_extensions==4.12.2
+  tzdata==2024.1
+  wcwidth==0.2.13
   xlsx2csv==0.8.3
   XlsxWriter==3.2.0
 
