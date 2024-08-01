@@ -52,7 +52,8 @@ def summaryPage(presentation, dataFrames, dateStart, dateEnd):
 
         if shape.has_table:
             table = shape.table
-            tableName = table.cell(0,0).text_frame.text
+            tableName = table.cell(0,0).text_frame.text # table name is stored in the first cell and column as of now.
+            # if this changes, need to figure out what cell it is in and change the indices to look for the name
             rowLength = len(table.rows)
             colLength = len(table.columns)
             startrow, startcol = findStartCell(table)
