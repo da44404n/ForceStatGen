@@ -34,8 +34,6 @@ REPORTNAME = 'Force Stat Report'
 PRESENTATIONNAME = 'Overview'
 TEMPLATENAME = 'Template'
 
-test = 1
-
 reportPath = f'{outputDirectory}\\{REPORTNAME}.xlsx'
 presentationPath = f'{outputDirectory}\\{PRESENTATIONNAME}.pptx'
 templatePath = f'{templateDirectory}\\{TEMPLATENAME}.pptx'
