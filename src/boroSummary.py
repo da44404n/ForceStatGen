@@ -51,7 +51,7 @@ def calcLevelsBS(boro, currentIncidentPeriod, previousIncidentPeriod,
 
     boroYTDDiff = calculations.prevDiff(boroCurrentYTDLevels, boroPreviousYTDLevels)
 
-    boroLevels = concat([boroCurrentPeriodLevels,boroPreviousPeriodLevels,boroPeriodDiff,boroCurrentYTDLevels,boroPreviousYTDLevels,boroCurrentYTDLevels,boroPreviousYTDLevels,boroYTDDiff],axis=1)
+    boroLevels = concat([boroCurrentPeriodLevels,boroPreviousPeriodLevels,boroPeriodDiff,boroCurrentYTDLevels,boroPreviousYTDLevels,boroYTDDiff],axis=1)
 
     return boroLevels
 
