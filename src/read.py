@@ -23,6 +23,6 @@ def readData(fp1, fp2, fp3):
             try:
                 results[key] = read_csv(file_path, low_memory=False, thousands=',')
             except Exception:
-                results[key] = read_csv(file_path, low_memory=False, thousands=',', encoding='utf-16')
+                results[key] = read_csv(file_path, low_memory=False, thousands=',', encoding='utf-16', sep='\t')
 
     return results['incall'], results['intall'], results['arrests']

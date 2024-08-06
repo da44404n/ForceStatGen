@@ -23,10 +23,10 @@ boroDict = {
                        '013','014','015','016','017','018',
                        '161','181'
                         },
-            'PBQN' : {  '100','101','102','103','105','106',
+            'PBQS' : {  '100','101','102','103','105','106',
                         '107', '113','171','185'
                         },
-            'PBQS' : {  '104','108','109','110','111','112',
+            'PBQN' : {  '104','108','109','110','111','112',
                         '114','115','169','184'
                         },
             'PBBX' : {  '040','041','042','043','044','045',
@@ -54,16 +54,24 @@ def calcLevelsBBD(boro, period):
 
     pctCols = period[['OWNING COMMAND','OWNING_COMMAND_CODE']]
     pctDict = pctCols.set_index('OWNING_COMMAND_CODE')['OWNING COMMAND'].to_dict()
+    pctDict = {key.lstrip('0'): value for key, value in pctDict.items()}
 
     boroLevel, boroLevelP = calculations.levelsBreakdown(period, 'OWNING_COMMAND_CODE')
+    boroLevel.columns = [col.lstrip('0') for col in boroLevel.columns]
+    boroLevelP.columns = [col.lstrip('0') for col in boroLevelP.columns]
+
     presentPcts = [col.lstrip('0') for col in pctList if int(col) in boroLevel.columns.astype(int)]
     presentPcts.sort()
+    
+    try:
+        boroLevel = boroLevel[presentPcts]
+        boroLevelP = boroLevelP[presentPcts]
 
-    boroLevel = boroLevel[presentPcts]
-    boroLevelP = boroLevelP[presentPcts]
-
-    boroLevel.columns = boroLevel.columns.map(pctDict)
-    boroLevelP.columns = boroLevelP.columns.map(pctDict)
+        boroLevel.columns = boroLevel.columns.map(pctDict)
+        boroLevelP.columns = boroLevelP.columns.map(pctDict)
+    except:
+        boroLevel = DataFrame()
+        boroLevelP = DataFrame()
 
     boroTotal, boroTotalP = calculations.levelsBreakdown(period, 'ALLBORO')
 
@@ -84,16 +92,20 @@ def calcIncBBD(func, boro, period):
 
     pctCols = period[['OWNING COMMAND','OWNING_COMMAND_CODE']]
     pctDict = pctCols.set_index('OWNING_COMMAND_CODE')['OWNING COMMAND'].to_dict()
+    pctDict = {key.lstrip('0'): value for key, value in pctDict.items()}
 
     boroInc = func(period, 'OWNING_COMMAND_CODE')
+    boroInc.columns = [col.lstrip('0') for col in boroInc.columns]
 
     presentPcts = [col.lstrip('0') for col in pctList if int(col) in boroInc.columns.astype(int)]
 
     presentPcts.sort()
 
-    boroInc = boroInc[presentPcts]
-
-    boroInc.columns = boroInc.columns.map(pctDict)
+    try:
+        boroInc = boroInc[presentPcts]
+        boroInc.columns = boroInc.columns.map(pctDict)
+    except:
+        boroInc = DataFrame()
 
     boroTotal = func(period, 'ALLBORO')
 
@@ -110,16 +122,22 @@ def calcIntBBD(func, boro, period):
 
     pctCols = period[['MOS Command Description','MOS Command Code']]
     pctDict = pctCols.set_index('MOS Command Code')['MOS Command Description'].to_dict()
+    pctDict = {key.lstrip('0'): value for key, value in pctDict.items()}
+    pctDict = {key.rstrip(' '): value for key, value in pctDict.items()}
 
     boroInt = func(period, 'MOS Command Code')
+    boroInt.columns = [col.lstrip('0') for col in boroInt.columns]
+    boroInt.columns = [col.rstrip(' ') for col in boroInt.columns]
 
     presentPcts = [col.lstrip('0') for col in pctList if int(col) in boroInt.columns.astype(int)]
 
     presentPcts.sort()
 
-    boroInt = boroInt[presentPcts]
-
-    boroInt.columns = boroInt.columns.map(pctDict)
+    try:
+        boroInt = boroInt[presentPcts]
+        boroInt.columns = boroInt.columns.map(pctDict)
+    except:
+        boroInt = DataFrame()
 
     boroTotal = func(period, 'ALLBORO')
 
@@ -166,12 +184,16 @@ def calcTriArrestsBBD(boro, incidentPeriod, arrestPeriod):
 
     pctCols = incidentPeriod[['OWNING COMMAND','OWNING_COMMAND_CODE']]
     pctDict = pctCols.set_index('OWNING_COMMAND_CODE')['OWNING COMMAND'].to_dict()
-    
+    pctDict = {key.lstrip('0'): value for key, value in pctDict.items()}
+
     boroTRI = triCalc(incidentPeriod, 'OWNING_COMMAND_CODE')
+    boroTRI.columns = [col.lstrip('0') for col in boroTRI.columns]
 
     arrestPeriod['Arresting_MOS_Command_Code'] = arrestPeriod['Arresting_MOS_Command_Code'].astype(str)
 
     boroArrests = arrestsCalc(arrestPeriod, 'Arresting_MOS_Command_Code')
+    boroArrests.columns = [col.lstrip('0') for col in boroArrests.columns]
+
     boroTriArrests = concat([boroTRI, boroArrests])
     boroTriArrests = boroTriArrests.T
 
@@ -183,9 +205,11 @@ def calcTriArrestsBBD(boro, incidentPeriod, arrestPeriod):
     presentPcts = [col.lstrip('0') for col in pctList if int(col) in boroTRI.columns.astype(int)]
     presentPcts.sort()
 
-    boroTriArrests = boroTriArrests[presentPcts].fillna(0)
-
-    boroTriArrests.columns = boroTriArrests.columns.map(pctDict)
+    try:
+        boroTriArrests = boroTriArrests[presentPcts].fillna(0)
+        boroTriArrests.columns = boroTriArrests.columns.map(pctDict)
+    except:
+        boroTriArrests = DataFrame()
 
     boroTriTotal = triCalc(incidentPeriod, 'ALLBORO')
 
