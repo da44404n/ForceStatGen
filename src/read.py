@@ -20,6 +20,9 @@ def readData(fp1, fp2, fp3):
         if file_path.endswith(('xlsx', 'xls')):
             results[key] = read_excel(file_path)
         else:
-            results[key] = read_csv(file_path, low_memory=False, thousands=',')
+            try:
+                results[key] = read_csv(file_path, low_memory=False, thousands=',')
+            except Exception:
+                results[key] = read_csv(file_path, low_memory=False, thousands=',', encoding='utf-16')
 
     return results['incall'], results['intall'], results['arrests']
